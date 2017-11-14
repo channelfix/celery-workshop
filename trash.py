@@ -1,7 +1,7 @@
 from celery import Celery
 
 
-app = Celery('trash', broker='pyamqp://guest@localhost//')
+app = Celery('trash', backend='rpc://', broker='pyamqp://guest@localhost//')
 
 
 @app.task
