@@ -21,3 +21,4 @@ It’s a task queue with focus on real-time processing, while also supporting ta
     * delay
     * apply_async
     * periodic tasks
+[code](https://github.com/name3anad/celery-workshop/blob/part2/celery_tasks/trash.py)
