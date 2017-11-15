@@ -2,14 +2,16 @@
 from __future__ import unicode_literals
 
 from django.views.generic import ListView
-from django.views.generic.edit import CreateView
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
 from .tasks import queue_download
 
 from youtubedl_queue.models import DownloadRequest
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class HomeView(ListView):
     template_name = 'youtubedl_queue/home.html'
     model = DownloadRequest
