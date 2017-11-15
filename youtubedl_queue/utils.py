@@ -15,7 +15,8 @@ def download(dl_request):
         print d
         if d['status'] == 'finished':
             dl_request.status = DownloadRequest.SUCCESS
-            dl_request.downloaded_file = d['filename']
+            dl_request.downloaded_file = d['filename'].replace(
+                settings.MEDIA_ROOT, '')
         elif d['status'] == 'downloading':
             dl_request.status = DownloadRequest.IN_PROGRESS
         else:

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YoutubeDL</title>
+    </head>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="url" name="youtube_url" required/>
+            <button>Download</button>
+        </form>
+        <ul>
+            {% for object in object_list %}
+                <li>
+                    <h2>
+                        <a href="{{ object.youtube_url }}" target="_object">{{ object.youtube_url }}</a>
+                    </h2>
+                    {% if object.downloaded_file %}
+                        <a href="{{ object.downloaded_file.url }}" target="_object">View</a>
+                        <a href="{{ object.downloaded_file.url }}" download>Download</a>
+                    {% else %}
+                        <p>{{ object.get_status_display }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
