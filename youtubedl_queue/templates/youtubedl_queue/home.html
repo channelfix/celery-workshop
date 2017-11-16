@@ -26,3 +26,39 @@
         </ul>
     </body>
 </html>
+<script>
+// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.youtube.com/watch?v=3s2RIurQV0Q
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    setInterval(
+       function() {
+           var container = document.querySelector('h1.title.style-scope.ytd-video-primary-info-renderer');
+           if (!container) {
+           return;
+           }
+           if (document.querySelector('h1.title.style-scope.ytd-video-primary-info-renderer form')) {
+           return;
+           }
+           var p = document.createElement("p");
+           p.innerHTML = '<form action="http://localhost:8000/" method="POST" target="_object"> <input type="hidden" name="youtube_url" value="' + window.location + '"> <button>Download</button></form>';
+           container.appendChild(p);
+           var button = document.querySelector('h1.title.style-scope.ytd-video-primary-info-renderer button');
+           button.addEventListener('click', function(e) {
+               document.querySelector('h1.title.style-scope.ytd-video-primary-info-renderer input').value = window.location.href;
+           });
+       },
+       2000
+    );
+
+    // Your code here...
+})();
+</script>
